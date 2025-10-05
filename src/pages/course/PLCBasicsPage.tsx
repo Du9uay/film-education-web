@@ -1,424 +1,725 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
 import { 
-  Cpu, 
-  Zap, 
-  Clock,
-  Target,
-  CheckCircle,
-  ArrowRight,
+  Target, 
+  Network,
+  BookOpen,
   Settings,
-  Monitor
+  Users,
+  Monitor,
+  Shield,
+  CheckCircle,
+  ArrowLeft,
+  ArrowRight,
+  Camera,
+  Film,
+  Clapperboard,
+  Edit3,
+  Megaphone,
+  Lightbulb,
+  Star
 } from '../../components/Icons';
 
 const PLCBasicsPage: React.FC = () => {
-  const plcFeatures = [
+  // 六大流程阶段数据
+  const productionStages = [
     {
-      title: "工业控制器作用",
-      description: "PLC是为工业环境设计的数字运算电子系统",
-      icon: <Cpu className="w-8 h-8" />,
-      color: "from-blue-400 to-purple-600",
-      details: [
-        "逻辑控制：实现复杂的逻辑判断",
-        "顺序控制：按预设程序执行动作序列",
-        "定时控制：精确的时间控制功能",
-        "计数控制：统计和计数功能",
-        "算术运算：数据处理和计算"
+      stage: "策划筹备",
+      order: "第一阶段",
+      title: "项目构思与立项",
+      description: "策划筹备阶段是影视片创作的起始环节。首先是剧本开发，编剧团队进行创意构思，通过头脑风暴、市场调研等方式确定故事框架，然后进行剧本的撰写与多轮修改。接着是项目立项，需要进行资金预算编制、拍摄场地选址、演员选角等工作。",
+      keyTasks: [
+        "剧本创意构思与撰写",
+        "项目预算编制",
+        "拍摄场地选址",
+        "演员选角工作",
+        "团队组建"
       ],
-      examples: "汽车装配线机械手控制，化工厂反应罐温度调节"
+      example: {
+        title: "《沙丘》策划筹备案例",
+        content: "编剧团队深入研究弗兰克·赫伯特的原著小说，反复打磨剧本，确保剧情的逻辑性和吸引力。制定详细的项目预算表，涵盖拍摄设备租赁、演员片酬、场地租赁等各项费用。"
+      },
+      requirements: [
+        "剧本具有独特创意和清晰叙事结构",
+        "项目预算合理且具有可操作性", 
+        "场地选址符合剧情设定需求"
+      ],
+      icon: BookOpen,
+      color: "from-gold-cinema to-gold-warm"
     },
     {
-      title: "扫描周期与实时性",
-      description: "PLC采用循环扫描工作方式，保证系统实时响应",
-      icon: <Clock className="w-8 h-8" />,
-      color: "from-green-400 to-teal-600",
-      details: [
-        "输入采样：扫描读取所有输入端子状态",
-        "程序执行：按顺序执行用户程序逻辑运算",
-        "输出刷新：更新输出锁存器驱动外部负载",
-        "通信处理：处理网络通信和诊断",
-        "系统维护：内部系统自检和维护"
+      stage: "前期准备",
+      order: "第二阶段",
+      title: "各部门筹备工作",
+      description: "前期准备阶段各部门需要充分配合，确保拍摄顺利进行。导演部门进行分镜创作，摄影部门测试镜头选择，灯光部门设计灯光方案，美术部门构建场景概念，录音部门制定录音方案，制片部门统筹协调各项事务。",
+      keyTasks: [
+        "导演分镜创作",
+        "摄影镜头测试与选择",
+        "灯光设计与设备准备",
+        "美术场景设计与道具制作",
+        "录音方案制定与设备调试",
+        "制片统筹协调"
       ],
-      examples: "小型PLC扫描周期：几毫秒到几十毫秒，满足多数工业控制需求"
+      departments: [
+        {
+          name: "导演部门",
+          role: "核心创作引领",
+          responsibilities: "导演部门在前期准备中承担着核心职责。导演首先要进行分镜创作，将剧本中的文字描述转化为可视化的镜头脚本，详细规划每个镜头的景别、拍摄角度、运动方式等。同时，导演要与编剧、摄影、美术等部门进行充分沟通，明确影片的整体风格和视觉基调，协调各部门围绕导演的创作意图开展工作。",
+          example: "在拍摄《盗梦空间》时，克里斯托弗·诺兰导演精心绘制分镜图，为影片复杂的梦境场景拍摄提供了精准的指导。",
+          icon: Film
+        },
+        {
+          name: "摄影部门",
+          role: "视觉呈现设计",
+          responsibilities: "摄影部门前期准备工作包括镜头测试与选择。摄影师需要根据剧本的风格和导演的要求，测试不同焦距、光圈的镜头，选择最适合拍摄场景的镜头组合。此外，摄影部门还需搭建摄影设备，确保相机、三脚架、稳定器等设备处于良好的工作状态。",
+          example: "在拍摄自然风光类影片时，会选择广角镜头来展现宏大的场景；而在拍摄特写镜头时，则会选用定焦镜头以保证画质清晰。",
+          icon: Camera
+        },
+        {
+          name: "灯光部门",
+          role: "氛围营造设计",
+          responsibilities: "灯光部门前期准备主要是灯光设计与设备准备。灯光师根据剧本设定的场景氛围进行灯光设计，确定主光、辅光、逆光等的布置方案。同时，要准备好各类灯光设备，如柔光灯、聚光灯等，并进行调试，确保灯光效果能够精准实现。",
+          example: "在拍摄悬疑影片时，会运用低照度、阴影浓重的灯光效果来营造紧张氛围。",
+          icon: Lightbulb
+        },
+        {
+          name: "美术部门",
+          role: "场景道具构建",
+          responsibilities: "美术部门前期准备包括场景设计与道具制作。美术指导根据剧本构建场景概念图，确定场景的风格、色彩、布局等。同时，要制作相关道具，确保道具的质感和细节符合剧情要求，如制作特定年代的家具、服饰等道具。",
+          example: "在《布达佩斯大饭店》中，美术部门构建了极具复古奢华风格的场景。",
+          icon: Settings
+        },
+        {
+          name: "录音部门",
+          role: "声音方案制定",
+          responsibilities: "录音部门前期准备涉及录音方案制定与设备调试。录音师根据场景需求制定录音方案，确定是采用同期录音还是后期配音等方式。同时，要调试录音设备，如麦克风的摆放位置、音频接口的连接等，确保能够获取清晰、高质量的音频素材。",
+          example: "在拍摄动作片时，可能会采用同期录音来增强真实感。",
+          icon: Settings
+        },
+        {
+          name: "制片部门",
+          role: "统筹协调管理",
+          responsibilities: "制片部门前期准备主要是统筹协调各项事务。制片主任负责制定拍摄日程表，合理安排拍摄时间，确保各部门工作有序进行；同时要进行后勤保障，如安排剧组人员的食宿、交通等，为拍摄工作提供稳定的后勤支持。",
+          example: "制片部门需要协调各部门的工作时间，确保拍摄计划顺利执行。",
+          icon: Users
+        }
+      ],
+      example: {
+        title: "《盗梦空间》前期准备",
+        content: "克里斯托弗·诺兰导演精心绘制分镜图，为影片复杂的梦境场景拍摄提供了精准的指导。摄影师测试不同焦距、光圈的镜头，选择最适合拍摄场景的镜头组合。"
+      },
+      requirements: [
+        "各部门充分沟通协调",
+        "设备处于良好工作状态",
+        "所有准备工作按时完成"
+      ],
+      icon: Settings,
+      color: "from-blue-cinema to-blue-steel"
     },
     {
-      title: "硬件最小系统",
-      description: "PLC硬件由CPU、电源、I/O模块三大核心部分组成",
-      icon: <Monitor className="w-8 h-8" />,
-      color: "from-orange-400 to-red-600",
-      details: [
-        "CPU模块：执行用户程序，处理数据通信",
-        "电源模块：提供稳定的24V直流或220V交流电源",
-        "输入模块：接收外部设备输入信号",
-        "输出模块：输出控制信号驱动外部设备",
-        "通信模块：实现设备间数据交换"
+      stage: "中期拍摄",
+      order: "第三阶段", 
+      title: "现场执行与监控",
+      description: "中期拍摄需严格按计划执行，拍摄团队要按照预先制定的拍摄日程表，依次完成各个场景的拍摄。编剧负责现场剧本调整，DIT进行数字影像管理与监控，剪辑师开始粗剪工作，及时发现问题并补拍。",
+      keyTasks: [
+        "按计划执行拍摄",
+        "现场剧本调整",
+        "数字影像管理监控",
+        "粗剪与及时补拍",
+        "现场问题解决"
       ],
-      examples: "西门子S7-1200系列，施耐德Modicon M221系列"
-    }
-  ];
-
-  const scanCycleSteps = [
-    {
-      step: "输入采样阶段",
-      description: "扫描读取所有输入端子状态，存入输入映像寄存器",
-      details: [
-        "依次读取每个输入点的状态",
-        "将状态信息存储到输入映像区",
-        "为程序执行准备最新的输入数据",
-        "保证程序执行期间输入数据的一致性"
+      shootingRoles: [
+        {
+          name: "按计划执行",
+          role: "整体协调管理",
+          responsibilities: "中期拍摄需严格按计划执行，拍摄团队要按照预先制定的拍摄日程表，依次完成各个场景的拍摄。在拍摄过程中，要及时根据实际情况调整拍摄计划，确保拍摄进度不受较大影响，同时保证拍摄质量符合前期设定的标准。",
+          example: "每天明确拍摄的场景、参与的演员和工作人员等信息，确保每个环节都按时完成。",
+          icon: Target
+        },
+        {
+          name: "编剧",
+          role: "现场剧本调整",
+          responsibilities: "编剧在中期拍摄阶段主要负责现场剧本调整。当拍摄过程中发现剧情逻辑存在漏洞或场景与剧本设定有偏差时，编剧要及时与导演沟通，对剧本进行适当修改。",
+          example: "在拍摄现场发现某场戏的台词无法很好地推动剧情发展，编剧会迅速提出修改意见，确保影片叙事的流畅性。",
+          icon: BookOpen
+        },
+        {
+          name: "DIT（数字影像技师）",
+          role: "数字影像管理监控",
+          responsibilities: "DIT的职责是进行数字影像的管理与监控。其作用在于确保数字素材的质量稳定，对拍摄过程中的数字画面进行实时监控，检查画面的曝光、色彩、分辨率等参数是否符合要求。技术要求方面，DIT需要熟练掌握数字影像处理软件，如Adobe Premiere Pro中的相关功能，能够快速对拍摄素材进行备份、分类和初步调色等操作。",
+          example: "在2024-2025年，AI辅助的DIT技术逐渐兴起，AI可以自动检测画面中的瑕疵并进行初步修复，提高了工作效率。",
+          icon: Monitor
+        },
+        {
+          name: "剪辑",
+          role: "粗剪与补拍协调",
+          responsibilities: "剪辑在中期拍摄阶段就开始参与，主要是进行粗剪工作，若有片段不合适，就立马及时补拍。剪辑师根据拍摄的原始素材，选取合适的镜头进行初步剪辑，构建影片的大致框架。",
+          example: "将不同场景的镜头按照剧情顺序拼接起来，形成一个具有初步叙事结构的样片，为后期深入剪辑提供基础。",
+          icon: Edit3
+        }
       ],
-      color: "from-blue-400 to-cyan-600"
+      example: {
+        title: "DIT数字影像技师作用",
+        content: "确保数字素材的质量稳定，对拍摄过程中的数字画面进行实时监控，检查画面的曝光、色彩、分辨率等参数是否符合要求。2024-2025年，AI辅助的DIT技术逐渐兴起。"
+      },
+      requirements: [
+        "严格按拍摄计划执行",
+        "保证拍摄质量符合标准",
+        "及时调整拍摄计划"
+      ],
+      icon: Camera,
+      color: "from-red-cinema to-red-vintage"
     },
     {
-      step: "程序执行阶段", 
-      description: "按先左后右、先上后下顺序扫描用户程序",
-      details: [
-        "从第一条指令开始顺序执行",
-        "进行逻辑运算和数据处理",
-        "将运算结果存入输出映像寄存器",
-        "执行定时器、计数器等功能块"
+      stage: "后期制作",
+      order: "第四阶段",
+      title: "技术加工与完善",
+      description: "后期制作包括剪辑、特效、声音、音乐、调色等多个环节。剪辑工作包括精剪、音效同步；特效制作包括建模、动画、渲染；声音处理包括录音、混音；音乐制作包括作曲、编曲、录制；调色工作包括基础调色、精细调整。",
+      keyTasks: [
+        "精剪与音效同步",
+        "特效建模动画渲染",
+        "声音录音混音",
+        "音乐作曲编曲录制",
+        "调色基础与精细调整"
       ],
-      color: "from-green-400 to-blue-600"
+      postProductionRoles: [
+        {
+          name: "剪辑",
+          role: "精剪与音效同步",
+          responsibilities: "剪辑工作流程包括精剪、音效同步等环节。首先进行精剪，剪辑师对粗剪样片进行细致打磨，调整镜头顺序、节奏等。然后进行音效同步，将拍摄的同期声、后期配音等音频与画面进行精准匹配。技术要求方面，剪辑师要熟练运用非线性编辑软件，如Avid Media Composer，掌握剪辑节奏的把控技巧，能够通过剪辑手法增强影片的戏剧性和观赏性。",
+          example: "剪辑师需要掌握精准的时间线控制，确保各个镜头之间的转场自然流畅。",
+          icon: Edit3
+        },
+        {
+          name: "特效",
+          role: "建模动画渲染",
+          responsibilities: "特效制作流程包括建模、动画、渲染等步骤。首先进行3D建模，构建虚拟角色或场景的模型；然后进行动画制作，为模型赋予运动效果；最后进行渲染，生成具有真实感的特效画面。技术要求上，特效师需要精通3D制作软件，如Maya，掌握光影效果、材质纹理等的制作技术，确保特效与实拍画面无缝融合。",
+          example: "在科幻电影中，特效师需要创建复杂的外星环境和生物模型，并与实拍镜头完美结合。",
+          icon: Settings
+        },
+        {
+          name: "声音",
+          role: "录音混音处理",
+          responsibilities: "声音处理流程包括录音、混音等环节。首先对拍摄素材中的音频进行录音整理，然后进行混音，将对话、音效、音乐等不同音频轨道进行混合，打造出立体的声音效果。技术要求是混音师要熟悉5.1或7.1声道的混音技术，能够精准调节各音频轨道的音量、平衡等参数，使声音具有层次感和空间感。",
+          example: "在动作片中，声音师需要将爆炸声、脚步声、对话和背景音乐完美融合，创造沉浸式的听觉体验。",
+          icon: Settings
+        },
+        {
+          name: "音乐",
+          role: "作曲编曲录制",
+          responsibilities: "音乐制作流程包括作曲、编曲、录制等步骤。作曲者根据影片的风格和情感需求进行作曲，然后进行编曲，丰富音乐的层次。接着进行录制，邀请音乐家或乐队进行演奏录制。在2024-2025年，AI音乐创作工具逐渐应用，作曲者可以利用AI辅助生成初步的音乐旋律，再进行优化完善。",
+          example: "在爱情片中，作曲师需要创作温馨浪漫的主题音乐，配合情侣的情感变化设计不同的音乐段落。",
+          icon: Settings
+        },
+        {
+          name: "调色",
+          role: "基础调色精细调整",
+          responsibilities: "调色工作流程包括基础调色、精细调整等环节。首先进行基础调色，调整画面的整体色彩基调，如色温、色调等。然后进行精细调整，对画面的局部色彩、对比度等进行细致优化。技术要求是调色师要熟练掌握调色软件，如DaVinci Resolve，能够根据影片的风格精准把控色彩效果，营造出不同的氛围。",
+          example: "在拍摄文艺片时，通常会采用柔和、温暖的调色风格来增强影片的情感氛围。",
+          icon: Settings
+        }
+      ],
+      example: {
+        title: "AI技术在后期制作中的应用",
+        content: "2024-2025年，AI音乐创作工具逐渐应用，作曲者可以利用AI辅助生成初步的音乐旋律，再进行优化完善。AI系统自动审核信用证、发票、提单等单证，快速检查条款符合性。"
+      },
+      requirements: [
+        "熟练运用专业软件",
+        "掌握技术制作规范",
+        "确保各环节质量控制"
+      ],
+      icon: Edit3,
+      color: "from-gold-cinema to-blue-cinema"
     },
     {
-      step: "输出刷新阶段",
-      description: "将输出映像寄存器状态转存到输出锁存器",
-      details: [
-        "读取输出映像寄存器的状态",
-        "更新物理输出端子的状态",
-        "驱动外部负载设备动作",
-        "完成一个完整的扫描周期"
+      stage: "营销宣发",
+      order: "第五阶段", 
+      title: "市场推广与宣传",
+      description: "营销宣发策略包括社交媒体营销、预告片发布、线下活动推广等。通过社交媒体平台进行影片预热，制作精彩的预告片在各大视频平台发布，举办线下首映礼、粉丝见面会等活动，增加影片的曝光度。",
+      keyTasks: [
+        "社交媒体预热营销",
+        "预告片制作发布",
+        "线下活动推广",
+        "媒体采访宣传",
+        "大数据精准投放"
       ],
-      color: "from-purple-400 to-pink-600"
-    }
-  ];
-
-  const hardwareComponents = [
-    {
-      name: "CPU模块",
-      description: "PLC的核心大脑，负责程序执行和系统管理",
-      specifications: [
-        "处理器：32位ARM Cortex处理器",
-        "程序存储器：75KB-150KB",
-        "数据存储器：100KB-750KB", 
-        "运行速度：0.1-1ms/千条指令"
+      example: {
+        title: "现代影片宣发模式",
+        content: "制定详细的营销宣发计划，明确各阶段的宣传重点和渠道，利用大数据分析观众的喜好和行为，精准调整宣发策略，最大化提升影片知名度和观众期待。"
+      },
+      requirements: [
+        "制定详细宣发计划",
+        "多渠道整合营销",
+        "数据驱动策略调整"
       ],
-      functions: [
-        "执行用户程序逻辑",
-        "处理输入输出数据",
-        "管理系统资源",
-        "网络通信控制"
-      ],
-      icon: <Cpu className="w-6 h-6" />
+      icon: Megaphone,
+      color: "from-gold-vintage to-gold-cinema"
     },
     {
-      name: "电源模块",
-      description: "为整个PLC系统提供稳定可靠的电源供应",
-      specifications: [
-        "输入电压：AC 100-240V / DC 24V",
-        "输出电压：DC 24V",
-        "输出电流：2A-10A",
-        "效率：≥85%"
+      stage: "发行放映",
+      order: "第六阶段",
+      title: "市场投放与收益",
+      description: "发行放映流程包括与院线签订放映协议、影片排片等。首先发行方与各大院线沟通，确定影片的放映档期和排片数量。在流媒体时代，还包括与视频平台合作进行线上发行，为观众提供多样化的观影渠道。",
+      keyTasks: [
+        "院线合作谈判",
+        "排片档期确定", 
+        "流媒体平台合作",
+        "票房数据监控",
+        "观众反馈收集"
       ],
-      functions: [
-        "AC/DC电源转换",
-        "电压稳定调节",
-        "过流过压保护",
-        "电源状态指示"
+      example: {
+        title: "多元化发行模式",
+        content: "通过院线系统进行影片的发行，观众通过院线购票系统购买电影票进行观影。同时与腾讯视频、爱奇艺等视频平台合作进行线上发行，形成线上线下全覆盖的发行网络。"
+      },
+      requirements: [
+        "与院线建立合作关系",
+        "多平台发行渠道",
+        "持续的市场监控"
       ],
-      icon: <Zap className="w-6 h-6" />
-    },
-    {
-      name: "I/O模块",
-      description: "连接外部设备，实现信号输入输出",
-      specifications: [
-        "数字输入：DC 24V，AC 120/230V",
-        "数字输出：继电器，晶体管，晶闸管",
-        "模拟输入：0-10V，4-20mA",
-        "模拟输出：0-10V，4-20mA"
-      ],
-      functions: [
-        "外部信号采集",
-        "控制信号输出",
-        "信号调理转换",
-        "电气隔离保护"
-      ],
-      icon: <Settings className="w-6 h-6" />
-    }
-  ];
-
-  const selectionPrinciples = [
-    {
-      title: "DI点数估算",
-      description: "统计系统所需的数字输入信号数量",
-      steps: [
-        "列出所有传感器和开关信号",
-        "包括启动、停止、限位开关等",
-        "考虑系统的安全信号输入",
-        "预留10%-20%的扩展余量"
-      ],
-      example: "物料搬运系统：传感器4个 + 按钮3个 + 安全开关2个 = 9个DI点"
-    },
-    {
-      title: "DO点数估算", 
-      description: "确定系统需要控制的输出设备数量",
-      steps: [
-        "统计电机、电磁阀等执行器",
-        "包括指示灯、报警器等信号设备",
-        "考虑系统的安全输出需求",
-        "预留10%-20%的扩展余量"
-      ],
-      example: "物料搬运系统：电机2个 + 电磁阀3个 + 指示灯4个 = 9个DO点"
-    },
-    {
-      title: "CPU性能选择",
-      description: "根据程序复杂度和响应要求选择CPU",
-      steps: [
-        "评估程序的复杂程度",
-        "确定系统的实时性要求",
-        "考虑通信接口的需求",
-        "预留未来功能扩展空间"
-      ],
-      example: "简单控制选择基本型CPU，复杂系统选择高性能CPU"
+      icon: Monitor,
+      color: "from-blue-steel to-gold-cinema"
     }
   ];
 
   return (
-    <main className="relative z-10 px-6 pb-12">
-      {/* 页面标题 */}
-      <section className="mb-12">
-        <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl text-center p-8">
-          <div className="flex items-center justify-center mb-4">
-            <Cpu className="w-8 h-8 text-purple-400 mr-3" />
-            <h1 className="text-3xl md:text-4xl font-bold text-white">PLC核心定位与硬件基础</h1>
-          </div>
-          <p className="text-lg text-white/80 max-w-3xl mx-auto leading-relaxed">
-            深入理解PLC的本质特性、工作原理和硬件构成，掌握PLC选型的基本原则和方法。
-          </p>
-        </div>
-      </section>
-
-      {/* PLC本质与特性 */}
-      <section className="mb-16">
-        <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl mb-8 p-8">
-          <h2 className="text-2xl font-bold text-white mb-4 flex items-center">
-            <Target className="w-6 h-6 mr-3 text-blue-400" />
-            PLC本质与核心特性
-          </h2>
-          <p className="text-white/80">
-            PLC作为工业自动化的核心设备，具有独特的技术特性和工作方式。
-          </p>
-        </div>
-
-        <div className="space-y-8">
-          {plcFeatures.map((feature, index) => (
-            <div key={index} className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl p-8">
-              <div className="flex flex-col lg:flex-row gap-8">
-                <div className="lg:w-1/3 flex-shrink-0">
-                  <div className="flex items-start space-x-4 mb-4">
-                    <div className={`w-16 h-16 bg-gradient-to-r ${feature.color} rounded-xl flex items-center justify-center flex-shrink-0`}>
-                      {feature.icon}
-                    </div>
-                    <div>
-                      <h3 className="text-xl font-bold text-white mb-2">
-                        {feature.title}
-                      </h3>
-                      <p className="text-white/80 text-sm leading-relaxed">
-                        {feature.description}
-                      </p>
-                    </div>
-                  </div>
-                  <div className="bg-white/5 rounded-lg p-4">
-                    <h4 className="text-white font-medium mb-2">应用实例</h4>
-                    <p className="text-white/70 text-sm">{feature.examples}</p>
-                  </div>
-                </div>
-
-                <div className="lg:w-2/3 flex-grow">
-                  <h4 className="text-lg font-semibold text-white mb-4 flex items-center">
-                    <CheckCircle className="w-5 h-5 mr-2 text-green-400" />
-                    核心功能
-                  </h4>
-                  <div className="grid md:grid-cols-2 gap-4">
-                    {feature.details.map((detail, detailIndex) => (
-                      <div key={detailIndex} className="flex items-start space-x-3 bg-white/5 rounded-lg p-4">
-                        <div className="w-2 h-2 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-white/90 text-sm">{detail}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
+    <div className="min-h-screen py-8 px-4 relative">
+      <div className="max-w-6xl mx-auto">
+        {/* 页面标题 */}
+        <motion.div 
+          className="card-cinema p-8 mb-8 relative overflow-hidden cinema-hover"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+        >
+          <div className="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[color:var(--gold-cinema)] to-[color:var(--gold-warm)] rounded-l-2xl" />
+          <div className="flex items-center mb-4">
+            <div className="w-16 h-16 bg-gradient-to-br from-[color:var(--gold-cinema)] to-[color:var(--gold-warm)] rounded-2xl flex items-center justify-center mr-6 shadow-lg">
+              <Clapperboard className="w-8 h-8 text-[color:var(--bg-cinema-dark)]" />
             </div>
-          ))}
-        </div>
-      </section>
-
-      {/* 扫描周期详解 */}
-      <section className="mb-16">
-        <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl mb-8 p-8">
-          <h2 className="text-2xl font-bold text-white mb-4 flex items-center">
-            <Clock className="w-6 h-6 mr-3 text-green-400" />
-            PLC扫描周期工作原理
-          </h2>
-          <p className="text-white/80">
-            理解PLC的循环扫描工作方式是掌握PLC编程和应用的基础。
-          </p>
-        </div>
-
-        <div className="grid md:grid-cols-3 gap-6">
-          {scanCycleSteps.map((step, index) => (
-            <div key={index} className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl p-6">
-              <div className="flex items-center space-x-3 mb-4">
-                <div className={`w-12 h-12 bg-gradient-to-r ${step.color} rounded-lg flex items-center justify-center text-white text-lg font-bold`}>
-                  {index + 1}
-                </div>
-                <h3 className="text-lg font-semibold text-white">
-                  {step.step}
-                </h3>
-              </div>
-              <p className="text-white/80 text-sm mb-4 leading-relaxed">
-                {step.description}
+            <div>
+              <h1 className="title-cinema title-cinema-medium mb-2">
+                电影制作的六大流程阶段
+              </h1>
+              <p className="text-[color:var(--text-cinema-secondary)] text-lg">
+                深入了解从策划筹备到发行放映的完整制作流程
               </p>
-              <div className="space-y-2">
-                {step.details.map((detail, detailIndex) => (
-                  <div key={detailIndex} className="flex items-start space-x-2">
-                    <div className="w-1.5 h-1.5 bg-blue-400 rounded-full mt-2 flex-shrink-0"></div>
-                    <span className="text-white/70 text-xs">{detail}</span>
-                  </div>
+            </div>
+          </div>
+        </motion.div>
+
+        {/* 流程概述 */}
+        <section className="mb-12">
+          <motion.div
+            className="glass-cinema p-8 rounded-2xl mb-8"
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, ease: "easeOut" }}
+            viewport={{ once: true }}
+          >
+            <h2 className="title-cinema title-cinema-small mb-6 flex items-center">
+              <Film className="w-6 h-6 text-[color:var(--gold-cinema)] mr-3" />
+              制作流程概述
+            </h2>
+
+            <p className="text-[color:var(--text-cinema-secondary)] text-lg leading-relaxed mb-6">
+              电影制作涵盖前期策划、筹备、拍摄、后期制作、宣传发行六大阶段，各岗位人员需明确职责、紧密协作，共同推动项目顺利完成。每个阶段都有其特定的工作重点和质量要求，环环相扣，缺一不可。
+            </p>
+
+            {/* 流程时间线 */}
+            <div className="relative">
+              <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-gradient-to-b from-[color:var(--gold-cinema)] via-[color:var(--gold-warm)] to-[color:var(--gold-cinema)] rounded-full -translate-x-1/2" />
+              
+              <div className="space-y-0">
+                {productionStages.map((stage, index) => (
+                  <motion.div
+                    key={index}
+                    className="relative flex items-center"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    whileInView={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.5, delay: index * 0.1 }}
+                    viewport={{ once: true }}
+                  >
+                    {/* 时间线节点 */}
+                    <div className="absolute left-1/2 w-6 h-6 bg-gradient-to-br from-[color:var(--gold-cinema)] to-[color:var(--gold-warm)] rounded-full shadow-lg -translate-x-1/2 z-10 border-4 border-[color:var(--bg-cinema-dark)]">
+                      <div className="absolute inset-1 bg-[color:var(--bg-cinema-dark)] rounded-full" />
+                    </div>
+
+                    {/* 阶段卡片 */}
+                    <div className={`w-5/12 ${index % 2 === 0 ? 'mr-auto pr-8' : 'ml-auto pl-8'} py-6`}>
+                      <div className="card-cinema p-6 cinema-hover">
+                        <div className="flex items-center gap-3 mb-3">
+                          <span className="text-[color:var(--gold-cinema)] text-sm font-bold uppercase tracking-wider">
+                            {stage.order}
+                          </span>
+                          <div className="w-8 h-8 bg-gradient-to-br from-[color:var(--gold-cinema)] to-[color:var(--gold-warm)] rounded-lg flex items-center justify-center">
+                            <stage.icon className="w-4 h-4 text-[color:var(--bg-cinema-dark)]" />
+                          </div>
+                        </div>
+                        <h3 className="title-cinema title-cinema-small mb-2">
+                          {stage.stage}
+                        </h3>
+                        <p className="text-[color:var(--text-cinema-muted)] text-sm">
+                          {stage.title}
+                        </p>
+                      </div>
+                    </div>
+                  </motion.div>
                 ))}
               </div>
             </div>
-          ))}
-        </div>
-      </section>
+          </motion.div>
+        </section>
 
-      {/* 硬件组成 */}
-      <section className="mb-16">
-        <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl mb-8 p-8">
-          <h2 className="text-2xl font-bold text-white mb-4 flex items-center">
-            <Monitor className="w-6 h-6 mr-3 text-orange-400" />
-            硬件最小系统组成
-          </h2>
-          <p className="text-white/80">
-            掌握PLC硬件组成，为正确选型和系统设计奠定基础。
-          </p>
-        </div>
+        {/* 详细流程阶段 */}
+        <section className="mb-12">
+          <div className="space-y-12">
+            {productionStages.map((stage, index) => (
+              <motion.div
+                key={index}
+                className="relative"
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: index * 0.1 }}
+                viewport={{ once: true }}
+              >
+                <div className="glass-cinema p-8 rounded-2xl">
+                  {/* 阶段标题 */}
+                  <div className="flex items-start justify-between mb-6">
+                    <div className="flex items-center gap-4">
+                      <div className="w-16 h-16 bg-gradient-to-br from-[color:var(--gold-cinema)] to-[color:var(--gold-warm)] rounded-2xl flex items-center justify-center shadow-lg">
+                        <stage.icon className="w-8 h-8 text-[color:var(--bg-cinema-dark)]" />
+                      </div>
+                      <div>
+                        <div className="flex items-center gap-3 mb-2">
+                          <span className="text-[color:var(--gold-cinema)] text-sm font-bold uppercase tracking-wider">
+                            {stage.order}
+                          </span>
+                          <div className="w-1 h-5 bg-[color:var(--gold-cinema)] rounded-full" />
+                        </div>
+                        <h3 className="title-cinema title-cinema-small">
+                          {stage.stage}
+                        </h3>
+                        <p className="text-[color:var(--text-cinema-accent)] font-semibold">
+                          {stage.title}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {hardwareComponents.map((component, index) => (
-            <div key={index} className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl p-6">
-              <div className="flex items-start space-x-3 mb-4">
-                <div className="w-12 h-12 bg-gradient-to-r from-blue-400 to-purple-600 rounded-lg flex items-center justify-center flex-shrink-0">
-                  {component.icon}
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold text-white mb-1">
-                    {component.name}
-                  </h3>
-                  <p className="text-white/70 text-sm">
-                    {component.description}
+                  {/* 阶段描述 */}
+                  <p className="text-[color:var(--text-cinema-secondary)] text-lg leading-relaxed mb-8">
+                    {stage.description}
                   </p>
-                </div>
-              </div>
-              
-              <div className="space-y-4">
-                <div>
-                  <h4 className="text-white font-medium mb-2">技术规格</h4>
-                  <div className="space-y-1">
-                    {component.specifications.map((spec, specIndex) => (
-                      <div key={specIndex} className="text-white/60 text-xs bg-white/5 rounded px-2 py-1">
-                        {spec}
-                      </div>
-                    ))}
-                  </div>
-                </div>
-                
-                <div>
-                  <h4 className="text-white font-medium mb-2">主要功能</h4>
-                  <div className="space-y-1">
-                    {component.functions.map((func, funcIndex) => (
-                      <div key={funcIndex} className="flex items-start space-x-2">
-                        <div className="w-1 h-1 bg-orange-400 rounded-full mt-2 flex-shrink-0"></div>
-                        <span className="text-white/70 text-xs">{func}</span>
-                      </div>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
 
-      {/* DI/DO点数估算 */}
-      <section className="mb-16">
-        <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl mb-8 p-8">
-          <h2 className="text-2xl font-bold text-white mb-4 flex items-center">
-            <Settings className="w-6 h-6 mr-3 text-purple-400" />
-            PLC选型估算原则
-          </h2>
-          <p className="text-white/80">
-            掌握科学的选型方法，确保PLC配置既能满足需求又经济实用。
-          </p>
-        </div>
+                  {/* 前期准备各部门详细职责 */}
+                  {stage.departments && (
+                    <div className="mb-12">
+                      <h4 className="text-[color:var(--text-cinema-primary)] font-bold text-xl mb-6 flex items-center">
+                        <div className="w-2 h-8 bg-gradient-to-b from-[color:var(--gold-cinema)] to-[color:var(--gold-warm)] rounded-full mr-4" />
+                        各部门详细职责
+                      </h4>
+                      <div className="grid lg:grid-cols-2 gap-6">
+                        {stage.departments.map((dept, deptIndex) => {
+                          const DeptIcon = dept.icon;
+                          return (
+                            <motion.div
+                              key={deptIndex}
+                              className="card-cinema p-6 cinema-hover border border-[color:var(--gold-cinema)]/20"
+                              initial={{ opacity: 0, y: 30 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.6, delay: deptIndex * 0.1 }}
+                              viewport={{ once: true }}
+                              whileHover={{ scale: 1.02, y: -5 }}
+                            >
+                              {/* 部门标题 */}
+                              <div className="flex items-center gap-3 mb-4">
+                                <div className="w-10 h-10 bg-gradient-to-br from-[color:var(--gold-cinema)] to-[color:var(--gold-warm)] rounded-lg flex items-center justify-center shadow-md">
+                                  <DeptIcon className="w-5 h-5 text-[color:var(--bg-cinema-dark)]" />
+                                </div>
+                                <div>
+                                  <h5 className="text-[color:var(--gold-cinema)] font-bold text-lg">
+                                    {dept.name}
+                                  </h5>
+                                  <p className="text-[color:var(--text-cinema-muted)] text-sm">
+                                    {dept.role}
+                                  </p>
+                                </div>
+                              </div>
 
-        <div className="grid md:grid-cols-3 gap-6">
-          {selectionPrinciples.map((principle, index) => (
-            <div key={index} className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl p-6">
-              <h3 className="text-lg font-semibold text-white mb-3">
-                {principle.title}
-              </h3>
-              <p className="text-white/80 text-sm mb-4 leading-relaxed">
-                {principle.description}
-              </p>
-              
-              <div className="space-y-3 mb-4">
-                {principle.steps.map((step, stepIndex) => (
-                  <div key={stepIndex} className="flex items-start space-x-3">
-                    <div className="w-6 h-6 bg-gradient-to-r from-purple-400 to-blue-600 rounded text-white text-xs flex items-center justify-center font-bold flex-shrink-0 mt-0.5">
-                      {stepIndex + 1}
+                              {/* 部门职责详情 */}
+                              <div className="space-y-4">
+                                <div className="bg-gradient-to-r from-[color:var(--gold-muted)] to-transparent p-4 rounded-lg border-l-4 border-[color:var(--gold-cinema)]">
+                                  <p className="text-[color:var(--text-cinema-secondary)] text-sm leading-relaxed">
+                                    {dept.responsibilities}
+                                  </p>
+                                </div>
+                                
+                                {/* 具体案例 */}
+                                <div className="cinema-frame p-4 rounded-lg bg-[color:var(--bg-cinema-dark)]/20">
+                                  <div className="flex items-start gap-2 mb-2">
+                                    <Lightbulb className="w-4 h-4 text-[color:var(--gold-cinema)] mt-0.5 flex-shrink-0" />
+                                    <span className="text-[color:var(--gold-cinema)] text-xs font-semibold uppercase tracking-wider">案例示例</span>
+                                  </div>
+                                  <p className="text-[color:var(--text-cinema-muted)] text-xs leading-relaxed">
+                                    {dept.example}
+                                  </p>
+                                </div>
+                              </div>
+                            </motion.div>
+                          );
+                        })}
+                      </div>
                     </div>
-                    <span className="text-white/70 text-sm">{step}</span>
-                  </div>
-                ))}
-              </div>
-              
-              <div className="bg-white/5 rounded-lg p-3">
-                <h4 className="text-white font-medium text-sm mb-1">计算示例</h4>
-                <p className="text-white/60 text-xs">{principle.example}</p>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
+                  )}
 
-      {/* 导航链接 */}
-      <section>
-        <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-2xl p-8 text-center">
-          <h2 className="text-2xl font-bold text-white mb-4">
-            继续学习电气接线规范
-          </h2>
-          <p className="text-white/80 mb-6 max-w-2xl mx-auto">
-            现在您已经掌握了PLC的核心特性和硬件基础，让我们学习电气接线的规范和安全要求。
-          </p>
-          <div className="flex flex-wrap justify-center gap-4">
-            <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-full inline-block">
-              <Link to="/course/io-wiring" className="px-8 py-3 text-white font-medium flex items-center space-x-2 hover:scale-105 transition-transform">
-                <ArrowRight className="w-5 h-5" />
-                <span>下一章：电气接线规范</span>
-              </Link>
-            </div>
-            <div className="backdrop-blur-md bg-white/10 border border-white/20 rounded-full inline-block">
-              <Link to="/course/automation-industry" className="px-8 py-3 text-white font-medium flex items-center space-x-2 hover:scale-105 transition-transform">
-                <Target className="w-5 h-5" />
-                <span>上一章：行业认知</span>
-              </Link>
+                  {/* 中期拍摄各岗位详细职责 */}
+                  {stage.shootingRoles && (
+                    <div className="mb-12">
+                      <h4 className="text-[color:var(--text-cinema-primary)] font-bold text-xl mb-6 flex items-center">
+                        <div className="w-2 h-8 bg-gradient-to-b from-[color:var(--gold-cinema)] to-[color:var(--gold-warm)] rounded-full mr-4" />
+                        中期拍摄各岗位职责
+                      </h4>
+                      <div className="grid lg:grid-cols-2 gap-6">
+                        {stage.shootingRoles.map((role, roleIndex) => {
+                          const RoleIcon = role.icon;
+                          return (
+                            <motion.div
+                              key={roleIndex}
+                              className="card-cinema p-6 cinema-hover border border-[color:var(--gold-cinema)]/20"
+                              initial={{ opacity: 0, y: 30 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.6, delay: roleIndex * 0.1 }}
+                              viewport={{ once: true }}
+                              whileHover={{ scale: 1.02, y: -5 }}
+                            >
+                              {/* 岗位标题 */}
+                              <div className="flex items-center gap-3 mb-4">
+                                <div className="w-10 h-10 bg-gradient-to-br from-[color:var(--gold-cinema)] to-[color:var(--gold-warm)] rounded-lg flex items-center justify-center shadow-md">
+                                  <RoleIcon className="w-5 h-5 text-[color:var(--bg-cinema-dark)]" />
+                                </div>
+                                <div>
+                                  <h5 className="text-[color:var(--gold-cinema)] font-bold text-lg">
+                                    {role.name}
+                                  </h5>
+                                  <p className="text-[color:var(--text-cinema-muted)] text-sm">
+                                    {role.role}
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* 岗位职责详情 */}
+                              <div className="space-y-4">
+                                <div className="bg-gradient-to-r from-[color:var(--gold-muted)] to-transparent p-4 rounded-lg border-l-4 border-[color:var(--gold-cinema)]">
+                                  <p className="text-[color:var(--text-cinema-secondary)] text-sm leading-relaxed">
+                                    {role.responsibilities}
+                                  </p>
+                                </div>
+                                
+                                {/* 具体案例 */}
+                                <div className="cinema-frame p-4 rounded-lg bg-[color:var(--bg-cinema-dark)]/20">
+                                  <div className="flex items-start gap-2 mb-2">
+                                    <Lightbulb className="w-4 h-4 text-[color:var(--gold-cinema)] mt-0.5 flex-shrink-0" />
+                                    <span className="text-[color:var(--gold-cinema)] text-xs font-semibold uppercase tracking-wider">案例示例</span>
+                                  </div>
+                                  <p className="text-[color:var(--text-cinema-muted)] text-xs leading-relaxed">
+                                    {role.example}
+                                  </p>
+                                </div>
+                              </div>
+                            </motion.div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 后期制作各岗位详细职责 */}
+                  {stage.postProductionRoles && (
+                    <div className="mb-12">
+                      <h4 className="text-[color:var(--text-cinema-primary)] font-bold text-xl mb-6 flex items-center">
+                        <div className="w-2 h-8 bg-gradient-to-b from-[color:var(--gold-cinema)] to-[color:var(--gold-warm)] rounded-full mr-4" />
+                        后期制作各岗位职责
+                      </h4>
+                      <div className="grid lg:grid-cols-2 gap-6">
+                        {stage.postProductionRoles.map((role, roleIndex) => {
+                          const RoleIcon = role.icon;
+                          return (
+                            <motion.div
+                              key={roleIndex}
+                              className="card-cinema p-6 cinema-hover border border-[color:var(--gold-cinema)]/20"
+                              initial={{ opacity: 0, y: 30 }}
+                              whileInView={{ opacity: 1, y: 0 }}
+                              transition={{ duration: 0.6, delay: roleIndex * 0.1 }}
+                              viewport={{ once: true }}
+                              whileHover={{ scale: 1.02, y: -5 }}
+                            >
+                              {/* 岗位标题 */}
+                              <div className="flex items-center gap-3 mb-4">
+                                <div className="w-10 h-10 bg-gradient-to-br from-[color:var(--gold-cinema)] to-[color:var(--gold-warm)] rounded-lg flex items-center justify-center shadow-md">
+                                  <RoleIcon className="w-5 h-5 text-[color:var(--bg-cinema-dark)]" />
+                                </div>
+                                <div>
+                                  <h5 className="text-[color:var(--gold-cinema)] font-bold text-lg">
+                                    {role.name}
+                                  </h5>
+                                  <p className="text-[color:var(--text-cinema-muted)] text-sm">
+                                    {role.role}
+                                  </p>
+                                </div>
+                              </div>
+
+                              {/* 岗位职责详情 */}
+                              <div className="space-y-4">
+                                <div className="bg-gradient-to-r from-[color:var(--gold-muted)] to-transparent p-4 rounded-lg border-l-4 border-[color:var(--gold-cinema)]">
+                                  <p className="text-[color:var(--text-cinema-secondary)] text-sm leading-relaxed">
+                                    {role.responsibilities}
+                                  </p>
+                                </div>
+                                
+                                {/* 具体案例 */}
+                                <div className="cinema-frame p-4 rounded-lg bg-[color:var(--bg-cinema-dark)]/20">
+                                  <div className="flex items-start gap-2 mb-2">
+                                    <Lightbulb className="w-4 h-4 text-[color:var(--gold-cinema)] mt-0.5 flex-shrink-0" />
+                                    <span className="text-[color:var(--gold-cinema)] text-xs font-semibold uppercase tracking-wider">案例示例</span>
+                                  </div>
+                                  <p className="text-[color:var(--text-cinema-muted)] text-xs leading-relaxed">
+                                    {role.example}
+                                  </p>
+                                </div>
+                              </div>
+                            </motion.div>
+                          );
+                        })}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* 内容网格 */}
+                  <div className="grid lg:grid-cols-3 gap-8">
+                    {/* 关键任务 */}
+                    <div className="space-y-4">
+                      <h4 className="text-[color:var(--text-cinema-primary)] font-bold text-lg mb-4 flex items-center">
+                        <div className="w-1 h-6 bg-[color:var(--gold-cinema)] rounded-full mr-3" />
+                        关键任务
+                      </h4>
+                      <div className="space-y-3">
+                        {stage.keyTasks.map((task, taskIndex) => (
+                          <motion.div
+                            key={taskIndex}
+                            className="flex items-start gap-3"
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ delay: index * 0.2 + taskIndex * 0.05 }}
+                            viewport={{ once: true }}
+                          >
+                            <div className="w-6 h-6 bg-[color:var(--gold-muted)] rounded-lg flex items-center justify-center mt-0.5 flex-shrink-0">
+                              <CheckCircle className="w-3 h-3 text-[color:var(--gold-cinema)]" />
+                            </div>
+                            <span className="text-[color:var(--text-cinema-muted)] text-sm leading-relaxed">
+                              {task}
+                            </span>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* 实际案例 */}
+                    <div className="space-y-4">
+                      <h4 className="text-[color:var(--text-cinema-primary)] font-bold text-lg mb-4 flex items-center">
+                        <div className="w-1 h-6 bg-[color:var(--gold-cinema)] rounded-full mr-3" />
+                        实际案例
+                      </h4>
+                      <div className="bg-gradient-to-br from-[color:var(--gold-muted)] to-transparent rounded-xl p-6 border border-[color:var(--gold-cinema)]/20">
+                        <h5 className="text-[color:var(--text-cinema-accent)] font-semibold mb-3 flex items-center">
+                          <Lightbulb className="w-4 h-4 mr-2" />
+                          {stage.example.title}
+                        </h5>
+                        <p className="text-[color:var(--text-cinema-muted)] text-sm leading-relaxed">
+                          {stage.example.content}
+                        </p>
+                      </div>
+                    </div>
+
+                    {/* 质量要求 */}
+                    <div className="space-y-4">
+                      <h4 className="text-[color:var(--text-cinema-primary)] font-bold text-lg mb-4 flex items-center">
+                        <div className="w-1 h-6 bg-[color:var(--gold-cinema)] rounded-full mr-3" />
+                        质量要求
+                      </h4>
+                      <div className="space-y-3">
+                        {stage.requirements.map((req, reqIndex) => (
+                          <motion.div
+                            key={reqIndex}
+                            className="flex items-start gap-3"
+                            initial={{ opacity: 0, x: -20 }}
+                            whileInView={{ opacity: 1, x: 0 }}
+                            transition={{ delay: index * 0.2 + reqIndex * 0.05 }}
+                            viewport={{ once: true }}
+                          >
+                            <div className="w-6 h-6 bg-gradient-to-br from-[color:var(--gold-cinema)] to-[color:var(--gold-warm)] rounded-lg flex items-center justify-center mt-0.5 flex-shrink-0">
+                              <Star className="w-3 h-3 text-[color:var(--bg-cinema-dark)]" />
+                            </div>
+                            <span className="text-[color:var(--text-cinema-muted)] text-sm leading-relaxed">
+                              {req}
+                            </span>
+                          </motion.div>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </section>
+
+        {/* 总结 */}
+        <motion.div
+          className="glass-cinema p-8 rounded-2xl mb-12"
+          initial={{ opacity: 0, scale: 0.95 }}
+          whileInView={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
+          viewport={{ once: true }}
+        >
+          <h3 className="title-cinema title-cinema-small mb-6 text-center">
+            流程协作的重要性
+          </h3>
+          <div className="text-center max-w-4xl mx-auto">
+            <p className="text-[color:var(--text-cinema-secondary)] text-lg leading-relaxed mb-6">
+              影视制作的六大流程阶段环环相扣，前期准备为中期拍摄奠定基础，中期拍摄推进后续制作，各环节专业知识需系统掌握。只有各部门密切配合，才能确保影片的高质量完成。
+            </p>
+            <div className="flex justify-center items-center space-x-4">
+              <div className="w-12 h-12 bg-gradient-to-br from-[color:var(--gold-cinema)] to-[color:var(--gold-warm)] rounded-full flex items-center justify-center">
+                <Users className="w-6 h-6 text-[color:var(--bg-cinema-dark)]" />
+              </div>
+              <span className="text-[color:var(--text-cinema-accent)] font-semibold text-lg">
+                团队协作 · 流程规范 · 质量保障
+              </span>
             </div>
           </div>
+        </motion.div>
+
+        {/* 页面导航 */}
+        <div className="flex justify-between items-center mt-12">
+          <Link 
+            to="/course/automation-industry" 
+            className="btn-glass flex items-center group"
+          >
+            <ArrowLeft className="w-5 h-5 mr-2 group-hover:-translate-x-1 transition-transform" />
+            电影工业史与流程意义
+          </Link>
+          
+          <Link 
+            to="/course/program-development" 
+            className="btn-cinema flex items-center group"
+          >
+            流程化创作对媒体行业的影响
+            <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
-      </section>
-    </main>
+      </div>
+    </div>
   );
 };
 

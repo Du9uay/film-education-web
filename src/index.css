@@ -6,16 +6,70 @@
   box-sizing: border-box;
 }
 
+/*/* 电影风格色彩系统变量 */
+:root {
+  /* 电影级深色背景 */
+  --bg-cinema-dark: #040406;
+  --bg-cinema-slate: #1A1B23;
+  --bg-cinema-charcoal: #2B2C35;
+  
+  /* 电影金色系 */
+  --gold-cinema: #FFD700;
+  --gold-warm: #F4D03F;
+  --gold-vintage: #DAA520;
+  --gold-muted: rgba(255, 215, 0, 0.15);
+  
+  /* 电影级文本颜色 */
+  --text-cinema-primary: #F8F9FA;
+  --text-cinema-secondary: #E9ECEF;
+  --text-cinema-muted: rgba(248, 249, 250, 0.7);
+  --text-cinema-accent: #FFD700;
+  
+  /* 电影蓝调 */
+  --blue-cinema: #4A90E2;
+  --blue-steel: #5D6D7E;
+  --blue-midnight: #1B2631;
+  
+  /* 影视红色 */
+  --red-cinema: #E74C3C;
+  --red-vintage: #C0392B;
+  
+  /* 电影级渐变 */
+  --gradient-cinema: linear-gradient(135deg, #FFD700 0%, #F39C12 50%, #E67E22 100%);
+  --gradient-dark: linear-gradient(135deg, #0A0A0F 0%, #1A1B23 50%, #2B2C35 100%);
+  --gradient-gold-fade: linear-gradient(135deg, rgba(255, 215, 0, 0.3) 0%, rgba(255, 215, 0, 0.1) 50%, transparent 100%);
+  
+  /* 电影级阴影 */
+  --shadow-cinema: 0 25px 50px -12px rgba(0, 0, 0, 0.8);
+  --shadow-gold: 0 10px 30px rgba(255, 215, 0, 0.3);
+  --shadow-inset: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+  
+  /* 向后兼容保留原有变量 */
+  --bg-ocean-900: var(--bg-cinema-dark);
+  --surf-tundra-700: var(--bg-cinema-slate);
+  --text-cashmere-100: var(--text-cinema-primary);
+  --accent-sand-500: var(--gold-cinema);
+  --accent-sand-500-16: var(--gold-muted);
+  --accent-sand-500-08: rgba(255, 215, 0, 0.08);
+  --line-omega: rgba(248, 249, 250, 0.15);
+  --text-muted: var(--text-cinema-muted);
+}
+
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Inter', 'SF Pro Display', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', system-ui, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: var(--bg-cinema-dark);
+  background-image: 
+    radial-gradient(circle at 20% 80%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(74, 144, 226, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 40% 40%, rgba(255, 215, 0, 0.02) 0%, transparent 50%);
+  color: var(--text-cinema-primary);
   min-height: 100vh;
   overflow-x: hidden;
+  /* 电影级纹理效果 */
+  position: relative;
 }
 
 code {
@@ -23,24 +77,680 @@ code {
     monospace;
 }
 
+/* 统一的按钮样式 - 电影风格 */
+.btn-primary {
+  background: var(--gradient-cinema);
+  color: var(--bg-cinema-dark);
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.3px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: var(--shadow-gold), var(--shadow-inset);
+  position: relative;
+  overflow: hidden;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-primary::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transition: left 0.5s;
+}
+
+.btn-primary:hover::before {
+  left: 100%;
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), var(--shadow-gold);
+}
+
+.btn-primary:active {
+  transform: translateY(-1px) scale(1.01);
+}
+
+.btn-primary:focus {
+  outline: none;
+}
+
+/* 统一的卡片样式 - 电影风格 */
+.card-base {
+  background: rgba(26, 27, 35, 0.7);
+  backdrop-filter: blur(25px) saturate(180%);
+  -webkit-backdrop-filter: blur(25px) saturate(180%);
+  border: 1px solid rgba(255, 215, 0, 0.1);
+  border-radius: 20px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3), var(--shadow-inset);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+  position: relative;
+  overflow: hidden;
+}
+
+.card-base::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gradient-cinema);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.card-base:hover::before {
+  opacity: 0.6;
+}
+
+.card-base:hover {
+  transform: translateY(-6px);
+  border-color: rgba(255, 215, 0, 0.25);
+  box-shadow: var(--shadow-cinema), 0 0 60px rgba(255, 215, 0, 0.1);
+  background: rgba(26, 27, 35, 0.8);
+}
+
+/* 统一的玻璃效果 - 电影级增强版 */
+.glass-effect {
+  background: rgba(26, 27, 35, 0.6);
+  backdrop-filter: blur(30px) saturate(200%) brightness(1.1);
+  -webkit-backdrop-filter: blur(30px) saturate(200%) brightness(1.1);
+  border: 1px solid rgba(255, 215, 0, 0.15);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), var(--shadow-inset);
+  border-radius: 20px;
+}
+
+/* 深度玻璃效果 - 用于重要组件 */
+.glass-deep {
+  background: rgba(122, 158, 159, 0.08);
+  backdrop-filter: blur(40px) saturate(180%) brightness(1.1);
+  -webkit-backdrop-filter: blur(40px) saturate(180%) brightness(1.1);
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12),
+              0 0 0 0.5px rgba(255, 255, 255, 0.15) inset;
+  border-radius: 24px;
+}
+
+/* 轻量玻璃效果 - 用于小组件 */
+.glass-light {
+  background: rgba(229, 223, 215, 0.03);
+  backdrop-filter: blur(12px) saturate(150%);
+  -webkit-backdrop-filter: blur(12px) saturate(150%);
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+  border-radius: 12px;
+}
+
+/*/* 交互态统一样式 */
+.focus-accent {
+  outline: none;
+}
+
+/* 移除所有按钮的边框和轮廓 */
+button:focus,
+button:focus-visible,
+.btn-primary:focus,
+.btn-primary:focus-visible,
+.btn-glass:focus,
+.btn-glass:focus-visible {
+  outline: none !important;
+  border: none !important;
+  box-shadow: none !important;
+}
+
+/*/* 确保导航栏按钮无边框 */
+nav button {
+  border: none !important;
+  outline: none !important;
+}
+
+/* 移除所有可能的焦点样式 */
+*:focus,
+*:focus-visible,
+*:focus-within {
+  outline: none !important;
+}
+
+/* 特别针对导航栏的所有交互元素 */
+nav a:focus,
+nav button:focus,
+nav a:focus-visible,
+nav button:focus-visible {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+/* 保留原有样式以兼容 - 更新为磨砂玻璃风格 */
 .glass-card {
-  backdrop-filter: blur(10px);
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 16px;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  background: rgba(138, 155, 143, 0.15);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 20px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), 
+              0 0 0 0.5px rgba(255, 255, 255, 0.1) inset;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .text-gradient {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  background: linear-gradient(135deg, var(--accent-sand-500) 0%, var(--text-cashmere-100) 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+}
+
+/* 隐藏滚动条样式 */
+.hide-scrollbar {
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE and Edge */
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none; /* Chrome, Safari and Opera */
+}
+
+/* 按钮玻璃效果 - 电影风格 */
+.btn-glass {
+  background: rgba(26, 27, 35, 0.4);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  color: var(--text-cinema-primary);
+  padding: 14px 28px;
+  border: 1px solid rgba(255, 215, 0, 0.2);
+  border-radius: 12px;
+  font-weight: 600;
+  font-size: 15px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3), var(--shadow-inset);
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-glass::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+  transition: left 0.5s;
+}
+
+.btn-glass:hover::before {
+  left: 100%;
+}
+
+.btn-glass:hover {
+  background: rgba(26, 27, 35, 0.6);
+  border-color: rgba(255, 215, 0, 0.4);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 20px rgba(255, 215, 0, 0.2);
+}
+
+/* 输入框玻璃效果 */
+.input-glass {
+  background: rgba(122, 158, 159, 0.05);
+  backdrop-filter: blur(16px) saturate(150%);
+  -webkit-backdrop-filter: blur(16px) saturate(150%);
+  border-radius: 12px;
+  padding: 12px 16px;
+  color: var(--text-cashmere-100);
+  box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.05) inset;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.input-glass:focus {
+  background: rgba(122, 158, 159, 0.08);
+  box-shadow: 0 0 0 2px rgba(212, 180, 131, 0.3),
+              0 0 0 0.5px rgba(255, 255, 255, 0.1) inset;
+  outline: none;
+}
+.input-glass::placeholder {
+  color: var(--text-muted);
+}
+
+/* 导航栏玻璃效果 */
+.nav-glass {
+  background: rgba(122, 158, 159, 0.02);
+  backdrop-filter: blur(24px) saturate(180%) brightness(1.05);
+  -webkit-backdrop-filter: blur(24px) saturate(180%) brightness(1.05);
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.05) inset;
+}
+
+/* 电影特效类 */
+.film-grain {
+  position: relative;
+}
+
+.film-grain::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  opacity: 0.03;
+  z-index: 1;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='1'/%3E%3C/svg%3E");
+  mix-blend-mode: overlay;
+}
+
+.cinema-frame {
+  position: relative;
+  border: 2px solid rgba(255, 215, 0, 0.1);
+  box-shadow: 
+    inset 0 0 20px rgba(0, 0, 0, 0.8),
+    0 0 40px rgba(255, 215, 0, 0.1);
+}
+
+.cinema-glow {
+  box-shadow: 
+    0 0 20px rgba(255, 215, 0, 0.2),
+    0 0 40px rgba(255, 215, 0, 0.1),
+    0 0 60px rgba(255, 215, 0, 0.05);
+}
+
+.cinema-text-glow {
+  text-shadow: 
+    0 0 10px rgba(255, 215, 0, 0.5),
+    0 0 20px rgba(255, 215, 0, 0.3),
+    0 0 30px rgba(255, 215, 0, 0.2);
+}
+
+.cinema-btn {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.1) 0%, rgba(255, 215, 0, 0.05) 100%);
+  border: 1px solid rgba(255, 215, 0, 0.3);
+  color: var(--gold-cinema);
+  padding: 12px 24px;
+  border-radius: 8px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.cinema-btn::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: radial-gradient(circle, rgba(255, 215, 0, 0.3) 0%, transparent 70%);
+  transition: width 0.6s, height 0.6s;
+  transform: translate(-50%, -50%);
+}
+
+.cinema-btn:hover::before {
+  width: 300px;
+  height: 300px;
+}
+
+.cinema-btn:hover {
+  background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);
+  border-color: var(--gold-cinema);
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+}
+
+/* 电影标题效果 */
+.cinema-title {
+  background: linear-gradient(180deg, var(--gold-cinema) 0%, var(--gold-vintage) 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-fill-color: transparent;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  font-weight: 800;
 }
 
 /* 响应式设计 */
 @media (max-width: 768px) {
   .container {
     padding: 1rem;
+  }
+  
+  /* 移动端减少模糊度以提升性能 */
+  .card-base, .glass-effect, .glass-card, .glass-deep {
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+  }
+}
+
+/* 性能优化样式 */
+/* 启用GPU加速 */
+.gpu-accelerated {
+  transform: translateZ(0);
+  will-change: transform;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  perspective: 1000px;
+}
+
+/* 优化过渡性能 */
+* {
+  /* 只在需要时使用will-change */
+  will-change: auto;
+}
+
+/* 简化的模糊效果 - 用于性能优化 */
+.glass-effect-light {
+  background: rgba(138, 155, 143, 0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  border-radius: 16px;
+}
+
+/* 减少动画复杂度 */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    animation-delay: 0.01ms !important;
+  }
+}
+
+/* 优化卡片悬浮效果 */
+.card-optimized {
+  transition: transform 0.2s ease-out, box-shadow 0.2s ease-out;
+  will-change: auto;
+}
+.card-optimized:hover {
+  transform: translateY(-2px);
+  will-change: transform, box-shadow;
+}
+
+/* 简化的阴影效果 */
+.shadow-optimized {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+.shadow-optimized-hover:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
+}
+
+/* ===============================
+   电影风格专用样式
+   =============================== */
+
+/* 电影级按钮样式 */
+.btn-cinema {
+  background: var(--gradient-cinema);
+  color: var(--bg-cinema-dark);
+  padding: 16px 32px;
+  border-radius: 12px;
+  font-weight: 700;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: var(--shadow-gold), var(--shadow-inset);
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-cinema::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s;
+}
+
+.btn-cinema:hover::before {
+  left: 100%;
+}
+
+.btn-cinema:hover {
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: var(--shadow-cinema), var(--shadow-gold);
+}
+
+/* 电影级卡片样式 */
+.card-cinema {
+  background: rgba(26, 27, 35, 0.8);
+  backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid rgba(255, 215, 0, 0.1);
+  border-radius: 20px;
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.card-cinema::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--gradient-cinema);
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.card-cinema:hover::before {
+  opacity: 1;
+}
+
+.card-cinema:hover {
+  transform: translateY(-8px);
+  border-color: rgba(255, 215, 0, 0.3);
+  box-shadow: var(--shadow-cinema), 0 0 50px rgba(255, 215, 0, 0.1);
+}
+
+/* 电影级标题样式 */
+.title-cinema {
+  background: var(--gradient-cinema);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  position: relative;
+}
+
+.title-cinema-large {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+}
+
+.title-cinema-medium {
+  font-size: clamp(1.8rem, 4vw, 2.5rem);
+}
+
+.title-cinema-small {
+  font-size: clamp(1.2rem, 3vw, 1.8rem);
+}
+
+/* 电影风格文字效果 */
+.text-cinema-glow {
+  color: var(--gold-cinema);
+  text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+  animation: cinemaGlow 2s ease-in-out infinite alternate;
+}
+
+@keyframes cinemaGlow {
+  0% { text-shadow: 0 0 20px rgba(255, 215, 0, 0.5), 0 0 40px rgba(255, 215, 0, 0.2); }
+  100% { text-shadow: 0 0 30px rgba(255, 215, 0, 0.8), 0 0 60px rgba(255, 215, 0, 0.3); }
+}
+
+/* 电影级玻璃效果 */
+.glass-cinema {
+  background: rgba(26, 27, 35, 0.4);
+  backdrop-filter: blur(25px) saturate(200%);
+  -webkit-backdrop-filter: blur(25px) saturate(200%);
+  border: 1px solid rgba(255, 215, 0, 0.15);
+  border-radius: 16px;
+  box-shadow: var(--shadow-inset), 0 8px 32px rgba(0, 0, 0, 0.3);
+}
+
+/* 电影级输入框 */
+.input-cinema {
+  background: rgba(26, 27, 35, 0.6);
+  border: 2px solid rgba(255, 215, 0, 0.2);
+  border-radius: 12px;
+  padding: 16px 20px;
+  color: var(--text-cinema-primary);
+  font-size: 16px;
+  transition: all 0.3s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.input-cinema:focus {
+  outline: none;
+  border-color: var(--gold-cinema);
+  background: rgba(26, 27, 35, 0.8);
+  box-shadow: 0 0 20px rgba(255, 215, 0, 0.3), var(--shadow-inset);
+}
+
+.input-cinema::placeholder {
+  color: var(--text-cinema-muted);
+}
+
+/* 电影级导航栏 */
+.nav-cinema {
+  background: rgba(10, 10, 15, 0.95);
+  backdrop-filter: blur(30px) saturate(180%);
+  border-bottom: 1px solid rgba(255, 215, 0, 0.1);
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.5);
+}
+
+/* 电影风格装饰元素 */
+.cinema-accent {
+  position: relative;
+}
+
+.cinema-accent::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 4px;
+  height: 100%;
+  background: var(--gradient-cinema);
+  border-radius: 2px;
+}
+
+/* 电影级动画 */
+.cinema-fade-in {
+  animation: cinemaFadeIn 0.8s cubic-bezier(0.23, 1, 0.320, 1) forwards;
+}
+
+@keyframes cinemaFadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.cinema-slide-up {
+  animation: cinemaSlideUp 0.6s cubic-bezier(0.23, 1, 0.320, 1) forwards;
+}
+
+@keyframes cinemaSlideUp {
+  0% {
+    opacity: 0;
+    transform: translateY(50px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 电影级悬浮效果 */
+.cinema-hover {
+  transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+}
+
+.cinema-hover:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: var(--shadow-cinema), 0 0 40px rgba(255, 215, 0, 0.2);
+}
+
+/* 电影风格分割线 */
+.divider-cinema {
+  height: 1px;
+  background: var(--gradient-cinema);
+  margin: 3rem 0;
+  position: relative;
+}
+
+.divider-cinema::before,
+.divider-cinema::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  width: 8px;
+  height: 8px;
+  background: var(--gold-cinema);
+  border-radius: 50%;
+  transform: translateY(-50%);
+}
+
+.divider-cinema::before {
+  left: 0;
+}
+
+.divider-cinema::after {
+  right: 0;
+}
+
+/* 胶卷机复古噪点动画 */
+@keyframes grain-movement {
+  0%, 100% { transform: translate(0, 0); }
+  10% { transform: translate(-1px, -1px); }
+  20% { transform: translate(1px, -1px); }
+  30% { transform: translate(-1px, 1px); }
+  40% { transform: translate(1px, 1px); }
+  50% { transform: translate(-1px, -1px); }
+  60% { transform: translate(1px, -1px); }
+  70% { transform: translate(-1px, 1px); }
+  80% { transform: translate(1px, 1px); }
+  90% { transform: translate(-1px, -1px); }
+}
+
+/* 胶卷颤抖效果 */
+@keyframes filmShake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-0.5px) translateY(0.5px); }
+  50% { transform: translateX(0.5px) translateY(-0.5px); }
+  75% { transform: translateX(-0.5px) translateY(-0.5px); }
+}
+
+/* 响应式电影风格 */
+@media (max-width: 768px) {
+  .card-cinema {
+    padding: 24px;
+    border-radius: 16px;
+  }
+  
+  .btn-cinema {
+    padding: 14px 28px;
+    font-size: 14px;
+  }
+  
+  /* 移动端减少动画复杂度 */
+  .cinema-hover:hover {
+    transform: translateY(-2px);
   }
 } 
