@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import { Users, Award, Target, Settings, Network, Camera, Film, Video, Edit3, N8N, GPT,LumaAI,TrendingUp,Building2,ChevronRight,Briefcase,Lightbulb,Sparkles,Trophy, Runway, CheckCircle } from '../components/Icons';
+import DigitalAvatarPlayer from '../components/DigitalAvatarPlayer';
 
 const HomePage: React.FC = () => {
   const [displayText, setDisplayText] = useState('');
@@ -127,7 +128,33 @@ const HomePage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen py-12 px-4 pb-32 overflow-hidden">
+    <div className="min-h-screen py-12 px-4 pb-32">
+      {/* 数字人播放器 - 从上到下分布 */}
+      <DigitalAvatarPlayer
+        videoUrl="https://ddcz-1315997005.cos.ap-nanjing.myqcloud.com/static/video/web_teach/recuYqXCNXqypc.mov"
+        position={{ top: '500px', right: '-5rem' }}
+      />
+      <DigitalAvatarPlayer
+        videoUrl="https://ddcz-1315997005.cos.ap-nanjing.myqcloud.com/static/video/web_teach/recuYxDy2nBQFn.mov"
+        position={{ top: '800px', right: '-5rem' }}
+      />
+      <DigitalAvatarPlayer
+        videoUrl="https://ddcz-1315997005.cos.ap-nanjing.myqcloud.com/static/video/web_teach/recuYxDy2n7UpX.mov"
+        position={{ top: '1500px', right: '-5rem' }}
+      />
+      <DigitalAvatarPlayer
+        videoUrl="https://ddcz-1315997005.cos.ap-nanjing.myqcloud.com/static/video/web_teach/recuYxDy2nU2Ic.mov"
+        position={{ top: '3000px', right: '-5rem' }}
+      />
+      <DigitalAvatarPlayer
+        videoUrl="https://ddcz-1315997005.cos.ap-nanjing.myqcloud.com/static/video/web_teach/recuYxDy2nRmM9.mov"
+        position={{ top: '4000px', right: '-5rem' }}
+      />
+      <DigitalAvatarPlayer
+        videoUrl="https://ddcz-1315997005.cos.ap-nanjing.myqcloud.com/static/video/web_teach/recuYxDJ6KBzGa.mov"
+        position={{ top: '4800px', right: '-5rem' }}
+      />
+
       <div className="max-w-6xl mx-auto">
         {/* 主标题区域 - 带动画 */}
         <motion.div 
@@ -902,8 +929,8 @@ const HomePage: React.FC = () => {
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.6 }}
           >
-            <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-tech-blue-500 to-tech-purple-500 rounded-2xl mr-6">
-              <Sparkles className="w-8 h-8 text-white" />
+            <div className="flex items-center justify-center w-16 h-16 bg-gradient-to-r from-[color:var(--gold-cinema)] to-[color:var(--gold-warm)] rounded-2xl mr-6">
+              <Sparkles className="w-8 h-8 text-[color:var(--bg-cinema-dark)]" />
             </div>
             <div>
               <h2 className="text-4xl font-bold bg-gradient-to-r text-white bg-clip-text text-transparent">通过学习，你能学到什么</h2>
