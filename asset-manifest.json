@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/film-education-web/static/css/main.81fad9bb.css",
+    "main.js": "/film-education-web/static/js/main.4e507531.js",
+    "index.html": "/film-education-web/index.html",
+    "main.81fad9bb.css.map": "/film-education-web/static/css/main.81fad9bb.css.map",
+    "main.4e507531.js.map": "/film-education-web/static/js/main.4e507531.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.81fad9bb.css",
+    "static/js/main.4e507531.js"
+  ]
+}
