@@ -132,27 +132,27 @@ const HomePage: React.FC = () => {
       {/* 数字人播放器 - 从上到下分布 */}
       <DigitalAvatarPlayer
         videoUrl="https://ddcz-1315997005.cos.ap-nanjing.myqcloud.com/static/video/web_teach/recuYqXCNXqypc.mov"
-        position={{ top: '500px', right: '-5rem' }}
+        position={{ top: '500px', right: '-3rem' }}
       />
       <DigitalAvatarPlayer
         videoUrl="https://ddcz-1315997005.cos.ap-nanjing.myqcloud.com/static/video/web_teach/recuYxDy2nBQFn.mov"
-        position={{ top: '800px', right: '-5rem' }}
+        position={{ top: '800px', right: '-3rem' }}
       />
       <DigitalAvatarPlayer
         videoUrl="https://ddcz-1315997005.cos.ap-nanjing.myqcloud.com/static/video/web_teach/recuYxDy2n7UpX.mov"
-        position={{ top: '1500px', right: '-5rem' }}
+        position={{ top: '1500px', right: '-3rem' }}
       />
       <DigitalAvatarPlayer
         videoUrl="https://ddcz-1315997005.cos.ap-nanjing.myqcloud.com/static/video/web_teach/recuYxDy2nU2Ic.mov"
-        position={{ top: '3000px', right: '-5rem' }}
+        position={{ top: '3000px', right: '-3rem' }}
       />
       <DigitalAvatarPlayer
         videoUrl="https://ddcz-1315997005.cos.ap-nanjing.myqcloud.com/static/video/web_teach/recuYxDy2nRmM9.mov"
-        position={{ top: '4000px', right: '-5rem' }}
+        position={{ top: '4000px', right: '-3rem' }}
       />
       <DigitalAvatarPlayer
         videoUrl="https://ddcz-1315997005.cos.ap-nanjing.myqcloud.com/static/video/web_teach/recuYxDJ6KBzGa.mov"
-        position={{ top: '4800px', right: '-5rem' }}
+        position={{ top: '4800px', right: '-3rem' }}
       />
 
       <div className="max-w-6xl mx-auto">

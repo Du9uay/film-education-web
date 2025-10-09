@@ -1,6 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { PlayCircle, X } from './Icons';
+import { NONAME } from 'dns';
 
 // 全局状态管理 - 跟踪当前展开的视频播放器
 let currentExpandedPlayer: ((expanded: boolean) => void) | null = null;
@@ -229,12 +230,14 @@ const DigitalAvatarPlayer: React.FC<DigitalAvatarPlayerProps> = ({
                         muted={false}
                         style={{
                           background: 'transparent',
-                          borderRadius: '50%', // 确保视频也是圆形
+                          borderRadius: '0%', // 确保视频也是圆形
                           width: '120%',  // 适度放大视频内容
                           height: '120%', // 适度放大视频内容
-                          left: '50%',
+                          left: '42%',
                           top: '50%',
                           transform: 'translate(-50%, -50%)', // 居中对齐
+                          maxWidth: 'none', // 移除最大宽度限制
+                          maxHeight: 'none', // 移除最大高度限制
                         }}
                       >
                         <source src={videoUrl} type="video/mp4" />
