@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/film-education-web/static/css/main.7422d7dc.css",
-    "main.js": "/film-education-web/static/js/main.1e5623b7.js",
+    "main.css": "/film-education-web/static/css/main.cf146eb4.css",
+    "main.js": "/film-education-web/static/js/main.fad917db.js",
     "index.html": "/film-education-web/index.html",
-    "main.7422d7dc.css.map": "/film-education-web/static/css/main.7422d7dc.css.map",
-    "main.1e5623b7.js.map": "/film-education-web/static/js/main.1e5623b7.js.map"
+    "main.cf146eb4.css.map": "/film-education-web/static/css/main.cf146eb4.css.map",
+    "main.fad917db.js.map": "/film-education-web/static/js/main.fad917db.js.map"
   },
   "entrypoints": [
-    "static/css/main.7422d7dc.css",
-    "static/js/main.1e5623b7.js"
+    "static/css/main.cf146eb4.css",
+    "static/js/main.fad917db.js"
   ]
 }
