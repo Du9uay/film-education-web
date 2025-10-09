@@ -32,27 +32,28 @@ const Navigation: React.FC = () => {
   const isActivePath = (path: string) => location.pathname === path;
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 nav-cinema">
-      <div className="max-w-7xl mx-auto px-6">
-        <div className="flex items-center justify-between h-16">
-          <div className="flex items-center gap-4">
-            {/* 直播回放按钮 */}
-            <button
-              onClick={() => setIsLiveReplayOpen(true)}
-              className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white text-sm font-medium rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
-            >
-              <Play className="w-4 h-4" />
-              <span>直播回放</span>
-            </button>
+    <>
+      <nav className="fixed top-0 left-0 right-0 z-50 nav-cinema">
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="flex items-center justify-between h-16">
+            <div className="flex items-center gap-4">
+              {/* 直播回放按钮 */}
+              <button
+                onClick={() => setIsLiveReplayOpen(true)}
+                className="flex items-center gap-2 px-4 py-2 bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white text-sm font-medium rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:scale-105"
+              >
+                <Play className="w-4 h-4" />
+                <span>直播回放</span>
+              </button>
 
-            {/* Logo */}
-            <Link to="/" className="flex items-center space-x-3">
-              <div className="w-10 h-10 bg-gradient-to-br from-[color:var(--gold-cinema)] to-[color:var(--gold-warm)] rounded-lg flex items-center justify-center shadow-lg">
-                <Film className="w-6 h-6 text-[color:var(--bg-cinema-dark)]" />
-              </div>
-              <span className="text-cinema-primary font-bold text-lg bg-gradient-to-r from-[color:var(--gold-cinema)] to-[color:var(--gold-warm)] bg-clip-text text-transparent">规范化影视片创作</span>
-            </Link>
-          </div>
+              {/* Logo */}
+              <Link to="/" className="flex items-center space-x-3">
+                <div className="w-10 h-10 bg-gradient-to-br from-[color:var(--gold-cinema)] to-[color:var(--gold-warm)] rounded-lg flex items-center justify-center shadow-lg">
+                  <Film className="w-6 h-6 text-[color:var(--bg-cinema-dark)]" />
+                </div>
+                <span className="text-cinema-primary font-bold text-lg bg-gradient-to-r from-[color:var(--gold-cinema)] to-[color:var(--gold-warm)] bg-clip-text text-transparent">规范化影视片创作</span>
+              </Link>
+            </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex items-center space-x-8">
@@ -163,11 +164,12 @@ const Navigation: React.FC = () => {
             </Link>
           </div>
         )}
-      </div>
+        </div>
+      </nav>
 
       {/* 直播回放模态框 */}
       {isLiveReplayOpen && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+        <div className="fixed inset-0 z-[100] flex items-center justify-center p-4">
           {/* 背景遮罩 */}
           <div
             className="absolute inset-0 bg-black/80 backdrop-blur-sm"
@@ -205,7 +207,7 @@ const Navigation: React.FC = () => {
           </div>
         </div>
       )}
-    </nav>
+    </>
   );
 };
 

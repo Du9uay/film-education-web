@@ -441,11 +441,11 @@ const ProgramDevelopmentPage: React.FC = () => {
             电影制作的六大流程阶段
           </Link>
           
-          <Link 
-            to="/course-summary"
+          <Link
+            to="/course-test"
             className="btn-cinema flex items-center group"
           >
-            课程总结
+            课堂测试
             <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
           </Link>
         </div>
