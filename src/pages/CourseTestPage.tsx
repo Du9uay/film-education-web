@@ -948,7 +948,7 @@ const CourseTestPage: React.FC = () => {
             className="flex items-center space-x-2 px-6 py-3 cinema-frame rounded-xl text-gold-warm hover:bg-white/5 transition-all duration-300"
           >
             <Target className="w-5 h-5" />
-            <span>返回：程序开发流程</span>
+            <span>返回：流程化创作的行业影响</span>
           </Link>
 
           <Link
